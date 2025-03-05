@@ -47,7 +47,7 @@ BANNER_NAME="cffconvert"
 FILE_TYPE_SEARCH_PATTERN='No Magic Pattern'
 
 # File name to match [Regex based]
-FILE_NAME_SEARCH_PATTERN='^CITATION.cff$'
+FILE_NAME_SEARCH_PATTERN='CITATION.cff$'
 
 # Set where to look for files.
 SCAN_ROOT='.'
@@ -83,7 +83,8 @@ function check_file()
 
     file_count=$((file_count + 1))
     # shellcheck disable=SC2310
-    if ! errors=$(run_command "${TEST_COMMAND[@]}" < "${filename}"); then
+
+    if ! errors=$(run_command "${TEST_COMMAND[@]}" "--infile" "${filename}"); then
         fail "${filename}" "${errors}"
         fail_count=$((fail_count + 1))
     else
